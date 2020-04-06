@@ -1,0 +1,117 @@
+The Standard Template Library (STL) - Generic Programming with Macros
+
+Bjarne Stroustrup (creator of C++)
+
+Generic Programming with Macros
+
+-Generic Programming
+    "Writing code that works with a variety of types of arguments,
+    as long as those argument types meeting specific syntatic and 
+    semantic requirements", Bjarne Stroustrup
+    
+-Macros ***beware***
+    -Be careful when you use Macros
+    -Especially when you use Macros with arguments
+    -Macros are more normally used in C code than C++
+    -Header guards #define are Macros
+-Function tempaltes
+-Class templates
+
+Macros (#define)
+-C++ preproccessor directives
+-No type information
+-Simple substitution
+
+    #define MAX_SIZE 100
+    #define PI 3.14159
+    
+-Macros begin with a # (preprocessor directives)
+-Preprocessor does not know C++
+
+Macros (#define)
+    
+    #define MAX_SIZE 100
+    #define PI 3.14159
+    
+    if(num > MAX_SIZE)
+    {
+        std::cout << "Too big";
+    }
+    
+    double area = PI * r * r;
+    
+-The better way to do this is with constants
+    -constants are typed and known to the compiler
+    
+Max Function
+-Suppose we need a function to determine the  max of 2 integers
+
+    int max(int a, int b)
+    {
+        return(a > b) ? a : b;
+    }
+
+-compares a to b, and evaluates if a is greater a is returned, if b is greater b is returned
+    
+    int x = 100;
+    int y = 200;
+    
+    std:cout << max(x, y);  //diplays 200;
+    
+Max Function
+-Now suppose we need to determine the max of 2 doubles, and 2 chars
+
+    int max(int a, int b)
+    {
+        return(a > b) ? a : b;
+    }
+    
+    double max(double a, double b)
+    {
+        return(a > b) ? a : b;
+    }
+    
+    char max(char a, char b)
+    {
+        return (a > b) ? a : b;
+    }
+    
+Macros with arguments (#define) / Generic Programming
+-We can write a generic macro with arguments instead
+
+    #define MAX(a, b) ((a > b) ? a : b)
+    
+    std::cout << MAX(10, 20) << std::endl;  //20
+    std::cout << MAX(2.4, 3.5) << std::endl; //3.5
+    std::cout << MAX('A', 'C') << std::endl; //C
+    
+-We defined a Macro named MAX that expects 2 arguments (a, b)
+
+Macros with arguments (#define)
+-We have to be careful with macros
+
+    #define SQUARE(a) a*a
+    
+    result = SQUARE(5);  //Expect 25
+    result = 5*5;  //Get 25
+    
+    result = 100/SQUARE(5);  //Expect 4
+    result = 100/5*5  //Get 100! (error)
+    
+Macros with arguments (#define)
+
+    #define SQUARE(a) ((a) * (a)) //note the parenthesis
+    
+    result = SQUARE(5);  //Expect 25
+    result = ((5) * (5)) //Still get 25
+    
+    result = 100/SQUARE(5);  //Expect 4
+    result = 100/((5) * (5));  //Now we get 4!!
+    
+-Best practice
+
+Why not to use Macros?
+-Because the preprocessor is doing it and not the compiler
+-Doesn't know the symantics of C++
+-Don't use Macros with Arguemnts
+    -Understand how they work in case you see them in legacy code

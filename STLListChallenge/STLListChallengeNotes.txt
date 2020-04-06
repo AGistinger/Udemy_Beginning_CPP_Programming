@@ -1,0 +1,52 @@
+The Standard Template Library (STL) - List Challenge
+
+In this challenge you will create a menu driven application that
+will simulate a user playing songs from a playlist of songs.
+
+We will use a list to simulate the user selecting the first song in the playlist
+then selecting the next and previous to play forward and backwards through the playlist.
+
+Please refer to the video demo run.
+
+We will also allow users to add new songs to the playlist and they
+will be added prior to the currently playign song.
+The menu looks as follows:
+
+F - Play First Song
+N - Play Next Song
+P - Play Previous Song
+A - Add and play a new Song at current location
+L - List the current playlist (will list the playlist and the currently playing song)
+================================================
+Enter a Selection (Q to quit):
+
+And the available playlist is modeled as std::list<Song>
+I will provide the Song class. Following are the songs in the playlist.
+I grabbed these from the pop charts, you can use them or change them to any songs you wish.
+
+Song Name           Artist                      Rating
+God's Plan          Drake                       5
+Never Be the Same   Camila Cabello              5
+Pray For Me         The Weekend and K. Lamar    4
+The Middle          Zedd, Maren Morris & Grey   5
+Wait                Maroone 5                   4
+Whatever It Takes   Imagine Dragons             3
+
+I have provided the starting project.
+Have fun!
+
+-First run the playlist will be displayed
+-Current song is an iterator
+-If you're at the first item and go previous, it should go to the last song
+-If you're at the last song and go next, it should go to the first song
+-Playing next or previous will have the song information displayed
+-Adding a new song will have you add a song name, artist and rating
+-Adding a new song will play that new song
+-You can add the last song in the list
+-You can save this information to file
+-Import this information from a file
+
+Note:
+If you have trouble reading input, you can clear cin and ignore everything in the buffer with:
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');

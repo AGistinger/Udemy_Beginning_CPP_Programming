@@ -1,0 +1,129 @@
+The Standard Template Library (STL) - Generic Programming with Function Templates
+
+Generic Programming with Function Templates
+
+What is a C++ Template?
+-Blueprint
+-Function and Class templates
+-Allow plugging-in any data type
+-Compiler generates the appropriate function/class from the blueprint
+-Generic programming/meta-programming
+    -Very complex difficult to understand
+    -Compiler doesn't have informative error messages
+        -Hard to debug
+
+Generic Programming with Function Templates
+-Let's revisit the max function from the last lecture
+
+    int max(int a, int b)
+    {
+        return (a > b) ? a : b;
+    }
+    
+    int x = 100;
+    int y = 200
+    std::cout << max(x, y);  //displays 200
+    
+Mex Function as a template Function
+-We can replace teh type we want to generalize with name, say T
+-But now this won't compile
+
+    T max (T a, T b)
+    {
+        return(a > b) ? a : b;
+    }
+
+-We need to tell the compiler that this is a template function
+
+Max Function as template function
+-We need to tell the compiler that this is a template function
+-We also need to tell it that T is the template parameter
+
+    template <typename T>
+    T max(T a, T b)
+    {
+        return (a > b) ? a : b;
+    }
+
+
+-template <typename T> will tell the compiler that T is the typename that will be replaced
+ with whatever type the user needs.
+-this will compile, but will not generate any code
+    -blueprint
+    -code is not generated until the user uses a particular version of the template
+    
+    template <class T>
+    T max(T a, T b)
+    {
+        return (a > b) ? a : b;
+    }
+    
+-You can use class intead of typename they are equivalent
+
+Max function as a template function
+-Now the compiler can generate the appropriate function from the template
+-Note, this happens at compile-time!
+
+    int a {10};
+    int b {20};
+    
+    std::cout << max<int>(a, b);
+    
+-In the above example placing <int> in the max template function will allow the compiler
+ to replace T with <int>
+-This is a similar use in vectors and smart pointers (which are template classes)
+
+Max function as template function
+-Many times the compiler can deduce the type and the tempalte parameter is not needed
+-Depdning on the type of a and b, the compiler will fiure it out
+
+    std::cout << max<double(c, d);
+    std::cout << max(c, d);
+    
+Max function as template function
+-And we can use almost any type we need
+
+    char a {'A'};
+    char b {'Z'};
+    
+    std::cout << max(a, b) << std::endl;
+    
+Max function as template function
+-Notice the type MUST support the > operator either natively or as an overloaded operator
+ (operator>)
+ 
+    template <typename T>
+    T max(T a, T b)
+    {
+        return (a > b) ? a : b;
+    }
+    
+-Custom class types must overload the > operator
+
+Max function as template function
+-The following will not compile unless Player overlaods operator>
+
+    Player p1 {"Hero", 100, 20};
+    Player p2 {"Enemy", 99, 3};
+    
+    std::cout << max<Player>(p1, p2);
+    
+Multiple Types As Template Parameters
+-We can have multiple template parameters
+-And their types can be different
+
+    template<typename T1, typename T2>
+    void func(T1 a, T2 b)
+    {
+        std::cout << a << " " << b;
+    }
+    
+Multiple Types As Template Parameters
+-When we use the function we provide the template parameters
+-Often the compiler can deduce them
+    
+    func<int, double>(10, 20.2);
+    func('A', 12.4);
+    
+-In the 2nd example the compiler will determine the parameter type
+-You can use references, pointers, etc.
