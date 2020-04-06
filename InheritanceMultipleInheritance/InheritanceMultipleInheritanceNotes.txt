@@ -1,0 +1,19 @@
+//Inheritance - Multiple Inheritance
+
+Multiple Inheritance
+-A derived class inherits from two or more Base classes at the same time
+-The Base classes may belong to unrelated class hierarchies
+-A Department Chair
+    -Is-A Faculty and
+    -Is-A Administrator
+    
+Example) C++ Syntax
+class Department_Chair : public Faculty, public Administrator
+{
+  //code  
+};
+
+-Beyond the scope of this course
+-Some complelling use-cases
+-Easily misused
+-Can be very complex

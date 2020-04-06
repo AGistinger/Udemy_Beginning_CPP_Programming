@@ -1,0 +1,45 @@
+//Inheritance Challenge
+
+You are provided with a simple Account class hierachy that contains
+Account - Base class
+Savings Account - Dervied class
+
+An Account has a name and a balance.
+A Savings ACcount is an Account and adds an interest rate.
+
+I have also provided some Account helper functions in Account_Util.h and Account_Util.cpp
+that make it easy to display, deposit to, and withdraw froma vector of Accounts and Savings Accounts.
+
+Please refer to the source code provided and teh video explanation of this challenge for more details.
+
+Your challenge is the following:
+
+1. Add a Checking account class to the Account heirachy (Sub-set of Account) - X
+    -A Checking account has a name and a balance and has a fee of $1.50 per withdrawal transaction. - X
+    -Every withdrawal transaction will be assessed this flat fee. - X
+    
+2. Add a Trust account class to the Account hiearchy (sub-set of Savings Account)
+    -A Trust account has a name, a balance, and an interest rate - X
+    -The Trust accoutn deposit works just like a savings account deposit. - X
+    -However, any deposits of $5000.00 or more will recieve a $50.00 bonus deposited to the account. - X
+    -The Trust account withdrawl should only allow 3 withdrawals per year and each of these must be less than 20% of the account balance. - X
+    -You don't have to keep track of the calendar time for this application, just make sure the 4th withdrawal fails :) - X
+
+Hints:
+    -Reuse existing functionality!!
+    -Think about what Base class will be for the new classes.
+    -Add helper functions to the Account_Util.h and Account_Util.cpp if you wish to work with your new classes. - X
+    
+Have fun!! You are no longer a beginner C++ programmer!
+
+If you want more practice with operator overloading you can overload += and -+ for deposit and withdrawl :)
+
+Note about Inheritance:
+-Can be a dangerous beast!
+-Providing ridid structure to code
+-If used too much can be hard to modify code
+-Use composition instead of inheritance
+-Composition includes soemthing in something else
+-Inheritance sometimes has parents that are not really simplier versions of themselves
+-Look up how to write Composition!!!!
+-Go programming langauge uses composition, composition + interfaces

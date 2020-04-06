@@ -1,0 +1,19 @@
+//Inheritance - Protected Members and Class Access
+
+The Protected Class Member Modifier
+class Base {
+protected:
+    //protected Base class members...
+};
+-Accessible from the Base class itself
+-Accessible from classes Derived from Base
+-Not accessible by objects of Base or Derived
+
+class Base {
+public:
+    int a; //public Base class emembers...
+protected:
+    int b; //protected Base class members
+private:
+    int c; //private Base class members
+};

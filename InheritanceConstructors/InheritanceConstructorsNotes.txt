@@ -1,0 +1,61 @@
+//Inheritance - Constructors and Destructors
+
+Constructors and class initialization
+-A derived class inherits from its Base class
+-The Base part of the Derived class MUST be initialized BEFORE the Derived class is initalized
+-When a Derived object is created
+    -Base class constructor executes then
+    -Derived blass constructor executes
+    
+Example) No-args Constructors
+
+class Base {
+public:
+    Base() {cout << "Base constructor" << endl; }
+};
+
+class Derived : public Base {
+public:
+Derived() {cout << "Derived constructor" << endl; }
+};
+
+Example) Constructors and Class initialization
+
+Base base;  //Base constructor
+Derived derived;  //Base Constructor
+                  //Derived Constructor
+                  
+Destructors
+-Class destructors are invoked in the reverse order as constructors
+-The Derived part of the Derived class MUST be destroyed BEFORE the base class destructor is invoked.
+-When a Derived object is destroyed
+    -Derived class destructor executes then
+    -Base class destructor executes
+    -Each destructor should free resourses allocated in it's own  constructors
+    
+Example) Destructors
+class Base {
+public:
+    Base() { cout << "Base constructor" << endl; }
+    ~Base() { cout << "Base destructor" << endl; }
+};
+
+class Derived : public Base {
+public:
+    Derived() { cout << "Derived constructor" << endl; }
+    ~Derived() { cout << "Derived destructor" << endl; } 
+};
+
+Constructors and Class Initialization
+-A Derived class does NOT inherit
+    -Base class constructors
+    -Base class destructor
+    -Base class overloaded assignment operators
+    -Base class friend functions
+    
+-However, the base class constructors, destructors, and overloaded assignment operators
+can invote the base-class versions
+
+-C++11 allows eplicit inheritance of base 'non-special' constructors with
+    -using Base::Base;  anywhere in the derived class declaration
+    -Lots of rules involved, often better to define the constructors yourself
