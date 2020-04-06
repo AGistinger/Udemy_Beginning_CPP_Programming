@@ -1,0 +1,62 @@
+// Operator Overloading - What is Operator Overloading?
+
+/*
+ * -Using functions:
+ *  Number result = multiple(add(a,b), divide(c,d);
+ * -Using member methods:
+ *  Number result = (a.add(b)).multipley(c.divide(d));
+ * 
+ * Using Overloaded Operators
+ *  Number result = (a+b) & (c/d);
+ * 
+ * Operator Overloading Basic Rules:
+ * -Precedence and Associativity cannot be chagned
+ * -'arity' cannot be changed(i.e. can't make the division operator unary)
+ * -Can't overload operators for primitye type (e.g. int, double, etc.)
+ * -Can't create new operators
+ * [], (), ->, and the assignemtn operator (=) must be declared as member methods
+ * -Other operators can be declared as member methods or global functions
+ * 
+ * Examples)
+ *  -int
+ *      a = b +c
+ *      a < b
+ *      std::cout << a
+ *  -double
+ *      a = b + c
+ *      a < b
+ *      std::cout << a
+ * -long
+ *      a = b + c
+ *      a < b
+ *      std::cout << a
+ *  -std::string
+ *      s1 = s2 + s3
+ *      s1 < s2
+ *      std::cout << s1
+ *  -Mystring
+ *      s1 = s2 + s3
+ *      s1 < s2
+ *      s1 == s2
+ *      std::cout << s1
+ *  -Player
+ *      p1 < p2
+ *      p1 == p2
+ *      std::cout p1
+ * 
+ * Operator overloading Mystring class declaration
+ * class Mystring {
+ * private:
+ *  char *str; //c-style string
+ * public:
+ *  Mystring();
+ *  Mystring(const char *s);
+ *  Mystring(const Mystring &source);
+ *  ~Mystring();
+ * 
+ *  void display() const;
+ *  int get_length() const;
+ *  const char *get_str() const;
+ * };
+ * 
+ * */

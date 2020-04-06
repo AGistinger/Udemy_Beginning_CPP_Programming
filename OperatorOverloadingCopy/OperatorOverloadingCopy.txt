@@ -1,0 +1,1 @@
+./Debug/MystringCopy.cpp.o ./Debug/main.cpp.o   
