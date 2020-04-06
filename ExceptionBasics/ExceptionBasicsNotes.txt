@@ -1,0 +1,80 @@
+//Exception Handeling - Basic concepts - Dividing by Zero
+
+Exception  Handling
+-Dealing with extraordinary situations
+-Indicates that an extraordinary situation has been detered or has occurred
+-Program can deal with the extraordinary situations in a suitable manner
+-Should only be used for syncronous code  (procedure has to return before the next statement can be executed)
+  not asyncronous code (???)
+
+What Causes Exceptions?
+-Insufficient resources
+-Missing resources
+-Invalid operations
+-Range violations
+-Underflows and Overflows
+-Illegal data and may others
+
+Exception Safe
+-When youre code handles exceptions
+
+Terminology
+    -Exception
+        -an object or primitive type that signals that an error has occurred
+    
+    -Throwing an exception (raising an exception)
+        -your code detects that an error has occurred or will occur
+        -the place where the rror occurred may not know how to handle the error
+        -code can throw an exception describing the rror to another part of the program
+        that knows how to handle the error
+    
+    -Catching an exception (hanlde the exception)
+        -code that handles the exception
+        -may or may not cause the program to terminate
+        
+C++ Syntax
+    -throw
+        -throws an exception
+        -followed by an argument
+    
+    -try { code that may throw an exception }
+        -you place code that may throw an exception in a try block
+        -if the code throws an exception the try block is exited
+        -the thrown ception is handled by a catch handler
+        -if no catch handler exists the program terminates
+        
+    -catch (Exception ex) { code to handle the exception }
+        -code that handles the exception
+        -can have multiple catch handlers
+        -may or may not cause the program to terminate
+        
+Example) Divide by zero example
+    -What happens if the total is zero?
+        -crash, overflow?
+        -it depends
+        
+double average {};
+average = sum / total;
+    
+double average {};
+if (total == 0)
+    //what to do?
+else
+    average = sum / total;
+ 
+ Example) Exception handling - Divide by 0
+double average {};
+try   //try block
+{
+    if(total == 0)
+        throw 0;  //throw the exception
+    average = sum / total;  //won't execute if total == 0
+    //use average here
+}
+
+catch(int &ex)  //exception handler
+{
+    std::ceer << "can't divide by zero" << std:;endl;
+}
+
+std::cout << "program continues" << std::endl;

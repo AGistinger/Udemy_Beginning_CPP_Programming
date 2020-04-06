@@ -1,0 +1,1 @@
+./Debug/main.cpp.o ./Debug/Trust.cpp.o ./Debug/Menu.cpp.o ./Debug/AccountUtil.cpp.o ./Debug/Savings.cpp.o ./Debug/Print.cpp.o ./Debug/Checking.cpp.o ./Debug/Account.cpp.o   
