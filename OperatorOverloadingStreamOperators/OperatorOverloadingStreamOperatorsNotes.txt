@@ -1,0 +1,54 @@
+//Notes - Operator Overloading Stream Insertion and Extration Operators
+
+Stream insertion and extraction operators (<<, >>)
+
+    Mystring larry {"Larry"};
+    cout << larry << endl; //Larry
+    
+    Player hero {"Hero", 100, 33};
+    cout << hero << endl;  //name: Hero, health: 100, xp: 33
+    
+Stream insertion and extraction operators (<<, >>)
+
+    Mystring larry;
+    cin >> larry;
+    
+    Player hero;
+    cin >> hero;
+    
+Stream insertion and extraction operators (<<, >>)
+-Doesn't make sense to implement as member methods
+    -left operand mus be a user-defined class
+    -Not the way we normally use the operators
+        
+        Mystring larry;
+        larry << cout;  //huh?
+        
+        Player hero;
+        hero >> cin;  //huh?
+        
+Stream Insertion Operator (<<)
+
+    std::ostream &operator<<(std::ostram &os, const Mystring &obj)
+    {
+        os << obj.str;  //if friend function
+        //os << obj.get_str();  //if not friend function
+        return os;
+    }
+
+-Return a reference to the ostream so we can keep inserting
+-Don't return ostream by value! (copy)
+
+Stream Extraction Operator (>>)
+
+    std::istream &operator>>(std::istream &is, Mystring &obj)
+    {
+        char *buff = new char [1000];
+        is >> buff;
+        obj = Mystring {buff};  //if you have a copy or move assignemnt operators
+        delete [] buff;
+        return is;
+    }
+    
+-Return a reference to the istream so we can keep inserting
+-Update the object passed in

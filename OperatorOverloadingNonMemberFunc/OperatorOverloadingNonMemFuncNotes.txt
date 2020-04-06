@@ -1,0 +1,107 @@
+//Notes Operator Overloading Non-Member Functions (Global Functions)
+
+Unary Operators as global functions (++, --, -, !)
+-Since these are NOT member functions, we No longer have a this pointer pointing to the left hand side
+-These are often declared as friend functions of the class
+-You can also use getter/setter methods
+-One object is in the parameter list for Unary Operators
+-Two objects are in the parameter list for Binary Operators
+
+    ReturnType operatorOp(Type &obj);
+    
+    Number operator-(const Number &obj);
+    Number operator++(Number &obj);  //pre-increment
+    Number operator++(Number &obj, int); //post-increment
+    bool operator!(const Number &obj);
+    
+    Number n1 {100};
+    Number n2 = -n1; //operator-(n1)
+    n2 = ++n1;  //operator++(n1)
+    n2 = n1++;  //operator++(n1, int);
+    
+Mystring operator- make lowercase (Global function) - Unary
+
+    Mystring larry1 {"LARRY"};
+    Mystring larry2;
+    
+    larry1.display();  //LARRY
+    
+    larry2 = -larry1;  //operator-(larry1)
+    
+    larry1.display();  //LARRY
+    larry2.display();  //larry
+    
+Mystring operator - Make Lowercase (Global Non-Member Function) - Unary
+-Often declared as friend functions in the class declaration
+-Not a member function
+-returns a Mystring obj by value
+-Expects a single parameter
+-This now users obj.str instead of this(str)
+-You cannot have the member and non-member versions of this overloaded operator at the same time
+ or the compiler will not know which one to use
+
+    Mystring operator-(const Mystring &obj)
+    {
+        char *buff = new char[std::strlen(obj.str) + 1];  //Creates a pointer buffer on the heap for the size of the string object
+        std::strcpy(buff, obj.str);  //Copys the string object into the buffer 
+        for(size_t i = 0; i < std::strlen(buff); i++)  //Changes all the char in the string to lowercase
+            buff[i] = std::tolower(buff[i]);
+        Mystring temp {buff};  //Creates a temporary Mystring object
+        delete [] buff;  //Deletes the buffer pointer
+        return temp;  //Returns the temporary object
+    }
+    
+Binary Operators as Global Functions (+, -, ==, <, >, etc.)
+-Two arguments are required by the function
+-First is lhs object and the second is the rhs object
+
+    ReturnType operatorOp(const &Type lhs, const &Type rhs);
+    
+    Number operator+(const &Number lhs, const &Number rhs);
+    Number operator-(const &Number lhs, const &Number rhs);
+    bool operator==(const &Number lhs, const &Number rhs);
+    bool operator<(const &Number lhs, const &Number rhs);
+    
+    Number n1 {100}, n2 {200};
+    Number n3 = n1 + n2;  //operator+(n1, n2)
+    n3 = n1 - n2;  //operator-(n1, n2)
+    if(n1 == n2)  //operator==(n1, n2)
+    
+Mystring operator= (Binary Global Function)
+-If declared as a friend of Mystring can access private str attribute
+-Otherwise must use getter methods
+-Uses a lhs object and rhs object instead of a this pointer
+
+    bool operator=(const Mystring &lhs, const Mystring &rhs)
+    {
+        if(std::strcmp(lhs.str, rhs.str) == 0)
+            return true;
+        else
+            return false;
+    }
+
+Mystring operator+ Concatenation (Binary Global Function)
+
+    Mystring larry {"Larry"};
+    Mystring moe {"Moe};
+    Mystring stooges {" is one of the three stooges"};
+    
+    Mystring result = larry + stooges;  //operator+(larry, stooges);
+    result = moe + " is also a stooge";  //operator+(moe, " is also a stooge");
+    
+    result = "Moe" + stooges; //OK with non-member functions
+    
+Mystring operator+ Concatenation (Binary Global Function)
+
+    Mystring operator+(const Mystring &lhs, const Mystring &rhs)
+    {
+        size_t buff_size = std:;strlen(lhs.str) + std::strlen(rhs.str) + 1;
+        char *buff = new char[buff_size];
+        std::strcpy(buff, lhs.str);
+        std::strcat(buff, rhs.str);
+        Mystring temp {buff};
+        delete [] buff;
+        return temp;
+    }
+    
+-uses lhs instad of this(str)

@@ -1,0 +1,93 @@
+//Overloading Operators as Member Functions
+
+Unary operators as member methods (++, --, -, !)
+    -Work on one operand
+
+    ReturnType Type::operatorOp();
+    
+    Number Number::operator-() const;
+    Number Number::operator++();  //Pre-incriment
+    Number Number::operator++(int);  //Post-incriment
+    bool Number::operator!() const;
+    
+    Number n1 {100};
+    Number n2 = -n1;  //n1.operator-()
+    n2 = ++n1;  //n1.operator()
+    n2 = n1++;  //n1.operator++(int)
+    
+Overloading Unary (-) Operator to make lowercase
+
+    Mystring larry1 {"LARRY"};
+    Mystring larry2;
+    
+    larry1.display();  //LARRY
+    larry2 = -larry1; //larry1.operator-()
+    
+    larry1.display();  //LARRY
+    larr2.display(); // larry
+    
+Code that shows how to make the overloaded operator change to lowercase
+
+    Mystring Mystring::operator-() const {
+        char *buff = new char [std::strlen(str) + 1];  //allocate space for memory on the heap
+        std::strcpy(buff, str);  //copy the string over
+        for(size_t i = 0; i < std::strlen(buff); i++) //loop through characters in the string and make them lowercase
+            buff[i] = std::tolower(buff[i]);
+        Mystring temp {buff};  //construct a temporary Mystring object with the buffer object as the initializer
+        delete [] buff;  //delete buffer to avoid leaking memory
+        return temp;  //return the new lowercase object
+    }
+    
+Binary Operators as member methods (+, -, ==, <, >, etc.)
+
+    ReturnType Type::operatorOp(const &Type rhs);
+    
+    Number Number::operator+(const &Number rhs) const;
+    Number Number::operator-(const &Number rhs) const;
+    bool Number::operator==(const &Number rhs) const;
+    bool Number::operator<(const &Number rhs) const;
+    
+    Number n1 {100}, n2 {200};
+    Number n3 = n1 + n2;  //n1.operator+(n2)
+    n3 = n1 - n2;  //n1.operator -(n2)
+    if(n1 == n2)  //n1.operator==(n2)
+    
+Binary Operator in Mystring Class operator (==)
+
+    bool Mystring ::operator==(const Mystring &rhs) const 
+    {
+        if(std::strmp(str, rhs.str) == 0)
+            return true;
+        else
+            return false;
+    }
+    
+    //if (s1 == s2)  //s1 and s2 are Mystring objects
+    
+Binary Operator in Mystring Class operator (+) concatenation
+
+    Mystrin glarry {"Larry"};
+    Mystring moe {"Moe"};
+    Mystring stooges {" is one of the three stooges"};
+    
+    Mystring result = larry + stooges;
+        //larry.operator+(stooges);
+    
+    result = moe + " is also a stooge";
+        //moe.operator+("is also a stooge");
+    
+    result = "Moe" + stooges;  //"Moe".operator+(stooges) ERROR r-value
+    
+    
+Binary Operator Overloading Mystring Operator+ (concatenation)
+
+    Mystring Mystring::operator+(const Mystring &rhs) const
+    {
+        size_t buff_size = std::strlen(str) + std::strlen(rhs.str) + 1;  //determining the size the new string array, must be +1 for the string terminator
+        char *buff = new char[buff_size];  //creating pointer to string array with the determined size
+        std::strcpy (buff, str);  //copying the left side string into the buff string array
+        std::strcat (buff, rhs.str);  //concatenating the right side string into the buff string array
+        Mystring temp {buff};  //creating a temp Mystring object initialized to buff
+        delete [] buff;  //deleting no longer needed buffer pointer 
+        return temp;  //returning the new concatenated object
+    }
