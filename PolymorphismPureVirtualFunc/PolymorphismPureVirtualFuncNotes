@@ -1,0 +1,85 @@
+//Polymorphism - Pure Virtual Functions and Abstract Classes
+
+Pure virtual functions and abstract classes
+
+-Abstract Class
+    -Cannot instantiate objects
+    -These classes are used as base classes in inheritance hierarchies
+    -often referred to as Abstract Base Classes
+    -Cannot create objects off Abstract Classes
+    
+-Concrete Class
+    -Used to instantiate objects from
+    -All their member functions are defined
+        -Checking Account, Savings Account
+        -Faculty, Staff
+        -Enemy, Level Boss
+        
+Abstract Base class
+    -Too generic to create objecst from
+        -Shape, Employee, Account, Player
+    -Serves as parent to Dervied classes that may have objects
+    -Contains at least one pure virtual function
+
+Pure virtual functions and abstract classes
+
+-Pure virtual function
+    -Used to make a class abstract
+    -Specified with "=0" in its declaration
+    
+        virtual void function() = 0;  //Pure Virtual Function
+        
+    -Typically do not provide implementations
+    
+-Derived classes MUST override the base class
+-If the Dervied class does nto override then the Derived class is also abstract
+-Used when it doesn't make sense for a base class to have an implementation
+    -But concrete classes must implement it
+    
+    virtual void draw() = 0;  //Shape
+    virtual void defend() = 0;  //Player
+    
+Example) Pure Virtual Functions and Abstract classes
+
+class Shape
+{
+private:
+    //attributes common to all shapes
+    
+public:
+    virtual void draw() = 0;  //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape();
+};
+
+Example) Concrete class
+
+class Circle : public Shape
+{
+private:
+    //attributes for a circle
+public:
+    virtual void draw() override
+    {
+        //code to draw a circle
+    }
+
+    virtual void rotate() override
+    {
+        //code to rotate a circle
+    }
+    
+    virtual ~Circle();
+};
+
+Abstract Base class
+    -Cannot be instantiated
+    
+        Shape shape;  //Error
+        Shake *ptr = new Shape();  //Error
+    
+    -We can use pointers and references to dynamically refer to concrete classes when derived from them
+    
+        Shape *ptr = new Circle();
+        ptr->draw();
+        ptr->rotate();

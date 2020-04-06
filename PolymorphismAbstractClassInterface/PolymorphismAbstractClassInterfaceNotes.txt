@@ -1,0 +1,117 @@
+//Polymorphism - Abstract Classes as Interfaces
+
+What is using a class as an interface?
+-An abstract class that has only pure virtual functions
+-these functions provide a general set of services to the user of the class
+-Provided as public
+-Each subclass is free to implement these services as needed
+-Every service (method) must be implemented
+-The service type information is strictly enforced
+
+A printable example
+
+-C++ does not provide true interfaces
+-We use abstract classes and pure virtual functions to achieve it
+-Suppose we want to be able to provide Printable support for any o bject we wish without
+ knowing it's implementation at compile time
+ 
+    std::cout << any_object << std::endl;
+    
+    -any_object must conform to the Printable interface
+    
+Example) Printable
+
+class Printable
+{
+    friend ostream &operator<<(ostream &out, const Printable &obj);
+
+public:
+    virtual void print(ostream &out) const = 0;
+    virtual ~Printable() {}
+};
+
+ostream &operator<<(ostream &out, const Printable &obj)
+{
+    obj.print(out);
+    return out;
+}
+
+Example) Printable
+
+class Any_Class : public Printable
+{
+public:
+    //must override Printable::print();
+    virtual void print(ostream &out) override
+    {
+        out << "Hi, from Any_Class";
+    }
+};
+
+Any_Class *ptr = new Any_Class();
+cout << *ptr << endl;
+
+void function1 (Any_Class &obj)
+{
+    cout << obj << endl;
+}
+
+void function2 (Printable &obj)
+{
+    cout << obj << endl;
+}
+
+fucntion1(*ptr);  //Hi, from Any_Class
+function2(*ptr);  //Hi, from Any_Class
+
+Example) Shapes
+
+class Shape
+{
+public:
+    virtual void draw() = 0;
+    virtual void rotate() = 0;
+    virtual ~Shape() {}
+};
+
+Example) Concrete Shape - Circle
+
+class Circle : public Shape
+{
+public:
+    virtual void draw() override {//code//}
+    virtual void rotate() override {//code//}
+    virtual ~Circle();
+};
+
+Example) Interface Class
+
+class I_Shape
+{
+public:
+    virtual void draw() = 0;
+    virtual void rotate() = 0;
+    virtual ~I_Shape() {}
+};
+
+//When you see a class derived from I_Shape you can know that it is an interface class
+class Circle : public I_Shape
+{
+public:
+    virtual void draw() override {//code//}
+    virtual void rotate() override {//code//}
+    virtual ~Cricle() {}
+};
+
+Example) Abstract Classes with Polymorphism
+vector<I_Shape*> shapes;
+I_Shape *p1 = new Circle();
+I_Shape *p2 = new Line();
+I_Shape *p3 = new Square();
+
+for(auto const &shape : shapes)
+{
+    shape->rotate();
+    shape->draw();
+}
+//delete the pointers

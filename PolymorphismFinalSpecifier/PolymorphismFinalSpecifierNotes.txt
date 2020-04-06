@@ -1,0 +1,43 @@
+//Polymorphism - Final Specifier
+
+The final specifier
+
+C++11 provides the final specifier
+-When used at the class level
+    -Prevents a class from being derived from or sub-classed
+
+-When used at the method level
+    -Prevents virtual method from being overridden in derived classes
+    
+Example) final specifier
+
+class My_class final
+{
+    
+};
+
+class Derived final : public Base
+{
+    
+};
+
+Example) final method
+
+class A
+{
+public:
+    virtual void do_something();
+};
+
+class B : public A 
+{
+public:
+    virtual void do_something() final;  //prevent further overriding
+};
+
+class C : Public B
+{
+public:
+    virtual void do_something();  //COMPILER ERROR - can't override
+};
+

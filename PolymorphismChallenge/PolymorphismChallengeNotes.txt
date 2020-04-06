@@ -1,0 +1,42 @@
+//Polymorphism - Challenge
+
+You are provided with a completed Account class hierarchy that was completed in Section 1.
+The provided class heirarchy does not use dynamic polymorphism (it has no virtual functions!).
+
+Your Challenge is the following:
+
+1. Modify the Account class so that it now is an Abstract class by adding teh follow pure virtual functions:
+    virtual bool deposit(double amount) = 0;
+    virtual bool withdraw(double amount) = 0;
+    
+    Hint: you can implement these functions in the Account class if it makes sense
+    
+2. Create an I_Printable class interface as we did in teh course and provide functionality so all accounts
+   are printable to an ostream using the overlaoded insertion operator <<.
+   
+        class I_Printable
+        {
+            friend std::ostream &operator<<(std::ostream &out, const I_Printable &obj);
+        
+        public:
+            virtual void print(std::ostream &out) const = 0;
+            virtual ~I_Printable() = default; //default tells the compiler to create a simple destructor for me
+        };
+        
+3. Modify the functions in the Account_Util files so we only have one version of each, for example:
+
+    void display(const std::vector<Account*> &accounts);
+    void deposit(std::vector<Account*> &accounts, double amount);
+    void withdraw(std::vector<Account*> &accounts, double amount);
+    
+4. Test yoru code with base class poitners as wella s local objects.
+   I provided a simple main driver that will get you started.
+   
+Hints:
+    -Reuse existing functionality!!
+    -If your class has virtual function then be sure to implement a virtual destructor.
+     You can have the C++ general a default destructor for you with:
+        virtual ~Class_name() = default;
+    -Take it one step at a time.
+    
+Have fun!! This is a very, very challenge exercise!

@@ -1,0 +1,55 @@
+//Polymorphism - Using the Override Specifier
+
+The Override specifier
+-We can override Base class virtual functions
+-The function signature and return must be EXACTLY the same
+-If they are different then we have redefinition NOT overriding
+-Redifinition is statically bound
+-Overriding is dynamically bound
+-C++11 provides an override specifier to have the compiler ensure overriding
+
+Example) The override specifier - Not Overriding if functions are not Exactly the same
+
+class Base
+{
+public:
+    virtual void say_hello() const
+    {
+        std::cout << "Hello - I'm a Base class object" << std::endl;
+    }
+    
+    virtual ~Base() {}
+};
+
+class Derived : public Base
+{
+public
+    virtual void say_hello() //Missing const - Not Overriding
+    {
+        std::cout << "Hello - I'm a Derived class object" << std::endl;
+    }
+};
+
+Example) Using the Override Specifier
+
+class Base
+{
+public:
+    virtual void say_hello() const
+    {
+        std::cout << "Hello - I'm a Base class object" << std::endl;
+    }
+    
+    virtual ~Base() {}
+};
+
+class Derived : public Base
+{
+public:
+    virtual void say_hello() override  //Produces Compiler error, Error: marked override but does not override
+    {
+        std::cout << "Hello - I'm a Derived class object" << std::endl;
+    }
+    
+    virtual ~Derived() {}
+};
