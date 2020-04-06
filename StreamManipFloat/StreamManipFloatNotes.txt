@@ -1,0 +1,73 @@
+// I/O and Streams / Stream Manipulators - Floating Point
+
+Formatting Floating Point Types
+
+-Default when displaying floating point values is:
+    -setprecision - number of digits displayed (6)
+    -fixed - not fixed to a specific number of digits after the decimal point
+    -noshowpoint - trailing zeros are not displayed
+    -nouppercase - when displaying in scientific notation
+    -noshowpos - no '+' is displayed for positive numbers
+
+-These manipulators affect all further output to the stream
+
+Formatting Floating Point Types - Precision
+
+    double num {1234.5678};
+    std::cout << num << std::endl;  // 1234.57 (notice precision is 6 and rounding)
+    
+Example) Formatting Floating Point Types - Precision
+
+    double num {123456789.987654321};
+    std::cout << num << std::endl;  // 1.234567e+008 (notice precision is 6)
+    
+Example) Using Set Precision
+
+    double num {123456789.987654321};
+    std::cout << std::setprecision (9);
+    std::cout << num << std::endl;  //123456790 (notice rounding occurs)
+    
+Formating Floating Point Types - Fixed
+    
+    double num {123456789.987654321};
+    std::cout << std::fixed;
+    std::cout << num << std::endl;  //123456789.987654 (will display precision 6 from the decimal)
+    
+Example) Using Fixed
+
+    double num {123456789.987654321};
+    std::cout << std::setprecision(3) << std::fixed;
+    std::cout << num << std::endl;  // 123456789.988 (will display 3 from the decimal)
+    
+Formatting Floating Point Types - Scientific
+
+    double num {123456789.987654321};
+    std::cout << std::setprecision(3) << std::scientific;
+    std::cout << num << std::endl;  //1.23e+088 (will display precision 3 with scientific)
+    
+Formating Floating Point Types -Scientific - Uppercase
+
+    double num {123456789.987654321};
+    std::cout << std::setprecision(3) << std::scientific << std::uppercase;
+    std::cout << num << std::endl;  // 1.23E+008 (capital 'E' in scientific)
+    
+Formatting Floating Point types - Displaying the Positive Sign
+
+    double num {123456789.987654321};
+    std::cout << std::setprecision(3) << std::fixed << std::showpos;
+    std::cout << num << std::endl;  // +123456789.988 (shows '+')
+    
+Formatting Floating Point Types - Trailing Zeros
+
+    double num {12.34};
+    std::cout << num << std::endl;  // 12.34
+    std::cout << std::showpoint;
+    std::cout << num << std::endl; // 12.3400 (trailing zeros)
+    
+Returning to General Settings
+    -unsetf
+        std::cout.unsetf(std::ios::scientific | std::ios::fixed);
+    or
+        std::cout << std::resetiosflags(std::ios::floatfield);
+        
+    -refer to the C++ reference docs for other set/reset flags

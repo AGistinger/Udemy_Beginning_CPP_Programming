@@ -1,0 +1,7 @@
+I/O and Streams - File locations with some Popular IDEs
+
+Codelite | std::ifstream in_file {"../test.txt"};
+Windows Visual Studio | std::ifstream in_file {"test.txt"};
+Code::Blocks | std::ifstream in_file {"test.txt"};
+CLion | std::ifstream in_file {"../test.txt"};
+Xcode | See the video

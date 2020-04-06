@@ -1,0 +1,156 @@
+/*
+The Standard Template Library (STL) - Sequence Containers - List and Forward List
+
+std::list and std::forward_list
+
+-Sequence containers
+-Non-contigous in memory
+-No direct access to elements (can't use .at() or [] to access elements)
+-Very efficient for inserting and deleting elements once an element is found
+
+std::list
+#include <list>
+
+-Dynamic size
+    -Lists of elements
+    -list is bidirectional (doubly-linked)
+-Direct element access is NOT provided
+-Rapid insertion and deletion of elements anywhere in the container (constant time)
+-All iterators available and invalidate when corresponding element is deleted
+
+std::list
+
+    std::list<int> l {1, 2, 3};
+    //1 (front()) - 2 - 3 (back())
+    
+You will want to use a list when you have a lot of insertion and deletions to elements in container,
+but do not need direct access to elements in the container.
+
+std::list - Initialization and Assignment
+
+    std::list<int> l {1, 2, 3, 4, 5};
+    std::list<int> ll (10, 200);  //ten 100s
+    
+    std::list<std::string> stooges
+    {
+        std::string("Larry"),
+        "Moe",
+        std::string("Curly")
+    };
+    
+    l = {2, 4, 6, 8, 10};
+    
+std::list - Common Methods
+
+    std::list<int> l {1, 2, 3, 4, 5};
+    
+    std::cout << l.size();  //5
+    std::cout << l.max_size; //a very large number
+    
+    std::cout << l.front();  //1
+    std::cout << l.back();  //5
+    
+std::list - Common Methods
+
+    Person p1 {"Larry", 18};
+    std::list<Person> l;
+    
+    l.push_back(p1);  //add p1 to the back
+    l.pop_back();  //remove p1 from the back
+    
+    l.push_front(Person{"Larry", 18});
+    1.pop_front();  //remove element from the front
+    
+    l.emplace_back("Larry", 18);  //add to back efficient!!
+    l.emplace_front("Moe", 24);  //add to front efficient!!
+    
+std::list - Methods that use Iterators
+
+    std::list<int> l {1, 2, 3, 4, 5};
+    std::list<int>::iterator it = std::find(l.begin(), l.end(), 3);
+    
+    //The insert method expects an iterator to the number you want to insert before and the number
+    l.insert(it, 10);  //Will insert the 10 before the 3- 1 2 10 3 4 5
+    
+    l.erase(it);  //erases the 3- 1 2 10 4 5
+    
+    //If you resize the list to a smaller size than what is currently used the other elements are deleted
+    l.resize(2);  //changes the size of the list to 2- 1 2
+    
+    //If you resize the list to a size greater than what you already have the list will be expanded and the default constructor for
+    //those elements will be called and stored in the newly created element
+    l.resize(5);  //changes the size of the list to 5- 1 2 0 0 0 
+    
+std::list - Common Methods
+
+//traversing the list (bi-directional)
+
+    std::list<int> l {1, 2, 3, 4, 5};
+    std::list<int>::iterator it = std::find(l.begin(), l.end(), 3);
+    
+    std::cout << *it;  //3
+    it++;
+    
+    std::cout << *it;  //4
+    it--;
+    
+    std::cout << *it;  //3
+    
+You can also use a range based for loop along with iterators.
+
+std::forward_list
+
+#include <forward_list>
+
+-Dynamic size
+    -Lists of elements
+    -List uni-directional (singly-linked)
+    -Less overhead than std::list
+-Direct element access is NOT provided
+-Rapid insertion and deletion of elements anywhere in the container (constant time)
+-Reverse iterators not available.  Iterators invalidate when corresponding element is deleted.
+
+std::forward_list
+
+    std::forward_list<int> l {1, 2, 3};
+    
+    1 front() - 2 - 3
+    
+std::forward_list - Common Methods
+
+    std::forward_list<int> l {1, 2, 3, 4, 5};
+    
+    std::cout << l.size();  //NOT AVAILABLE
+    std::cout << l.max_size;  //a very long number
+    
+    std::cout << l.front();  //1
+    std::cout << l.back();  //NOT AVAILABLE
+    
+std::forward_list - Common Methods
+
+    Person p1 {"Larry", 18};
+    std::forward_list<Person> fl;
+    
+    lf.push_front(p1);  //add p1 to the front
+    lf.pop_front();  //remove p1 from the front
+    lf.emplace_front("Moe", 24); //add to front
+    
+std::forward_list - Methods that use Iterators
+
+    std::forward_list<int> lf {1, 2, 3, 4, 5};
+    std::foward_list<int>::iterator it = std::find(lf.begin(), lf.end(), 3);
+    
+    /*
+     * Since the forward list is a singlely linked list, when using an iterator to insert items
+     * The items will be inserted AFTER the iterator
+     * */
+/*    
+    lf.insert_after(it, 10);  //1 2 3 10 4 5
+    lf.emplace_after(it, 100); //1 2 3 100 10 4 5
+    
+    lf.erase_after(it);  //erases the 100, 1 2 3 10 4 5
+    
+    lf.resize(2);  //1 2
+    
+    lf.resize(5);  //1 2 0 0 0 
+*/

@@ -1,0 +1,97 @@
+/*
+The Standard Template Library (STL) - Sequence Containers - Vector
+
+std::vector
+
+#include <vector>
+
+-Dynamic size
+    -Handled automatically
+    -Can expand and contract as needed
+    -Elements are stored in continguous memory as an array
+    
+-Direct element access (constant time)
+-Rapid insertion and eletion at teh back (constant time)
+-Insertion or removal of elements (linear time)
+-All iterators available and may invalidate
+    -This is especially true when the vector resizes and a new area in memory is allocated
+     for the extra storage.
+     
+std::vector
+
+    std::vector<int> vec {1, 2, 3};
+    // 1 (front() first element) 2 3 (back() last element)
+
+-You typically add elements to the back of the vector with the push_back() method
+
+    vec.push_back(4);
+    
+    //1 (front() first element) 2 3 4 (back() last element)
+    
+std::vector - Initialization and Assignment
+
+    std::vector<int> vec {1, 2, 3, 4, 5};
+    std::vector<int> vec1 {10, 100); //ten 100's when using parantheses instead of curly brackets, (overloaded constructor)
+    
+    std::vector<std::string> stooges
+    {
+        std::string ("Larry"),
+        std::string ("Moe"),
+        std::string ("Curly")
+    };
+    
+    vec1 = {2, 4, 6, 8, 10};
+    
+std::vector - Initialization and Assignment
+
+    std::vector<int> vec {1, 2, 3, 4, 5};
+    
+    std::cout << vec.size();  //5 - number of elements in the vector
+    std::cout << vec.capacity(); //5 - current capacity of the vector (when the capacity is exceed the vector will expand dynamically)
+    std::cout << vec.max_size; //a very large number - number of elements the vector can hold based on your machine 
+    
+    std::cout << vec.at(0);  //1 - access individual element via .at() method
+    std::cout << vec[1];  //2 - access individual element via subscript operator (no bounds checking)
+    
+    std::cout << vec.front();  //1 - will access the first element in the vector
+    std::cout << vec.back();  //5 - will access the last element in the vector
+    
+std::vector - Initialization and Assignment
+
+    Person p1 {"Larry", 18};
+    std::vector<Person> vec;
+    
+    vec.push_back(p1);  //add p1 to the back (copy of p1 is made then pushed to the back of the vector)
+    vec.pop_back();  //remove p1 from the back
+    
+    vec.push_back(Person{"Larry", 18}); //creating an un-named person object and pushing it back into the vector using move symantics
+    
+    vec.emplace_back("Larry, 18");  //efficient!! - expects the parameters that would normally be passed into the person constructor and constructs the object
+    
+std::vector - Common Methods
+
+    std::vector<int> vec1 {1, 2, 3, 4, 5};
+    std::vector<int> vec2 {10, 20, 30 , 40, 50};
+    
+    std::cout << vec1.empty(); //0 (false) - checks if vector is empty and returns true/false value
+    vec1.swap(vec2);  //swaps the 2 vectors elements (have to be the same type)
+    
+    std::sort(vec1.begin(), vec1.end());  //expects 2 iterators (from/to) and sorts the vector
+    
+std::vector - Common Methods
+
+    std::vector<int> vec1 {1, 2, 3, 4, 5};
+    std::vector<int> vec2 {10, 20, 30, 40, 50};
+    
+    //create an iterator and set the iterator to point to the 3, using the find algorithm to find the 3 in the vec1
+    std::vector<int>::iterator it = std::find(vec1.begin(), vec1.end(), 3);
+    
+    //call the insert method and pass in the iterator and the number you want to insert before the iterator
+    vec1.insert(it, 10);  //1, 2, 10, 3, 4, 5
+    
+    //set the iterator to point to the 4 in vec1, using the find method
+    it = std::find(vec1.begin(), vec1.end(), 4);
+    
+    //call the insert method and pass in the iterator you want to insert before and the sequence of elements from vec2
+    std::insert(it, vec2.begin(), vec2.end());  //1, 2, 10, 3, 10, 20, 30, 40, 50, 4, 5
+*/

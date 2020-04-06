@@ -1,0 +1,80 @@
+// I/O and Streams / Stream Manipulators - Align and Fill
+
+Field Width, Align, and Fill
+
+-Default when displaying floating oint value is:
+    -setw - not set by default (only affects next data element)
+    -left - when no field width, right - when using field width (persists)
+    -fill - not set by default - blank space when used (persists)
+
+-Some of these manipulators affect only the next data element put on the stream
+
+Defaults
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    std::cout << num << hello << std::endl;  // 1234.57Hello
+    
+Field Width - setw
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    std::cout << std::setw(10) << num << hello << std::endl;  // (right justified) 1234.57Hello
+    
+Field Width - setw
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    
+    std::cout << std::setw(10) << num
+                      << std::setw(10) << hello
+                      << std::setw(10) << hello << std::endl;
+    
+    //      1234.57      Hello       Hello
+    
+Field Width - justification
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    
+    std::cout << std::setw(10) << std::left << num  //only affects num!
+            << hello << std::endl;
+    // 1234.57      Hello
+    
+Field Width - setw
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    
+    std::cout << std::setw(10) << num
+                       << std::setw(10) << std::right << hello
+                       << std::setw(10) << std::right << hello
+                       << std::endl;
+                       
+    //Will display num as right justified and set to width of 10, hello to right and set to width of 10, and hello to right and set to width of 15
+    
+Filling Fixed Width - setfill
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    
+    std::cout << std::setfill('-'');
+    std::cout << std::setw(10) << num  << hello << std::endl;  //---1234.57Hello
+    
+    //Setting the fill will fill all the blank space with what you enter as the fill
+    //This only works if you have a field width associated with the item.
+
+Field Width - setw
+
+    double num {1234.5678};
+    std::string hello {"Hello"};
+    
+    std::cout << std::setfill('*');
+    std::cout << std::setw(10) << num
+                      << std::setfill ('-') << std::setw(10) << hello
+                      << std::setw(15) << hello
+                      << std::endl;
+                      
+    //Will display
+    123456789012345678901234567890  //ruler
+    ***1234.57-----Hello----------Hello

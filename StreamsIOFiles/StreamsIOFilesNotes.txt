@@ -1,0 +1,47 @@
+// I/O and Streams - Files , Streams, and I/O
+
+-C++ uses streams as an interface between the program and input and output devices
+-Independent of the actual device
+-Sequence of bytes
+-Input stream provides data to the program
+-Output stream receives data from the program
+
+Common Header files to include when using I/O Stream
+-iostream - Provides definitions for formatted input and output from/to streams
+-fstream - Provides definitions for formatted input and output from/to file streams
+-iomanip - Provides definitions for manipulators used to format stream I/O
+
+Commonly Used Stream Classes
+    -ios - Provides basic support for formatted and unformatted I/O operations.
+    Base class most other classes.
+ 
+    -ifstream - Provides for high-level input operations on file based streams.
+    If you want to read from a file you would  declare the object to be ifstream object.
+
+    -ofstream - Provides for high-level output operations on file based streams.
+    If you want to create a new file or write to a file you can declare it as an object from ofstream.
+
+    -fstream - Provides for high-level I/O operations on file based streams.
+    Derived from ofstream and ifstream (multiple inheritance)
+    If you need to Input and Outbook to an object at the same tiem you would declare it from fstream.
+
+    -stringstream - Provides for high-level I/O operations on memory based strings.
+    Derived from istringstream and ostringstream
+
+Global Stream Objects
+    -cin - Strandard input stream - by default 'connected' to the standard input device (keyboard)
+    Instance of istream (buffered)  - wont' be automatic until the user presses enter
+
+    -cout - Standard output stream - by default 'connected' to the standard output device (console)
+    Instance of ostream (buffered) - won't be automatic unless there is an endl or the user flushes the stream
+
+    -cerr - Standard error stream - by default 'connected' to the standard error device (console)
+    Instance of ostream (unbuffered) - as we need it
+ 
+    -clog - Standard log stream - by default 'connected' to the standard log device (console)
+    Instance of ostream (unbuffered)
+ 
+-Global objects - initialized before main executes
+-Best practice is to use cerr for error messages and clog for log messages.
+
+Search for Redirecting I/O to change where these stream objects are going

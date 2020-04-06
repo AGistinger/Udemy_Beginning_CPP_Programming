@@ -1,0 +1,153 @@
+// I/O and Streams - Reading from a Text File
+
+Input files (fstream and ifstream)
+
+fstream and ifstream are commonly used for input files
+
+1. # include <fstream>
+2. Declare an fstream or ifstream object
+3. Connect it to a file on your system (opens for reading)
+4. Read the data from the file via the stream
+5. Close the stream
+
+Opening a file for reading with (fstream)
+-Creating a object called in_file and using the (fstream) class as its type
+-The object needs to be initialized with two arguments
+-The first argument is the name of the file
+-The  second argument specifies the mode and any other properties 
+-The below example is opened in input mode which allows the file to be read but not written to
+
+    std::fstream in_file {".../myfile.txt", std::ios::in};
+    
+-Open for reading in binary mode
+-The below example is being opened in input mode and binary mode
+-When the | operator is used it says use the input and binary options and set them to true
+    
+    std::fstream in_file {"../myfile.txt", std::ios::in | std::ios::binary};
+    
+Opening a file for reading with (ifstream)
+-ifstream is used for input files only
+-You can create an object for ifsream the same as fstream
+-Then argument that specfies the mode is std::ios::in (input) by default so you do not have to write it
+
+    std::ifstream in_file {"../myfile.txt", std::ios::in};
+    
+    std::ifstream in_file {"../myfile.txt"};
+    
+-Open for reading in binary mode
+    std::ifstream in_file {"/myfile.txt", std::ios::binary};
+    
+Opening a file for reading with open
+-Created a ifstream object without a file associated with it
+-Once you have a file name you can use in_file.open(filename) to open the file
+-or you can in_file.open(filename, std::ios::binary) any additional flags that need to be set
+
+    std::ifstream in_file;
+    std::string filename;
+    std::cin >> filename;  //get the file name
+    
+    in_file.open(filename);
+    //or
+    in_file.open(filename, std::ios::binary);
+    
+Check if file opened succesfully (is_open)
+-is_open() will return a boolean to determine if the file was processed or not
+
+    if(in_file.is_open()) 
+    {
+        //read from it
+    }
+    else
+    {
+        //file could not be opened
+        //does it exist?
+        //should the program terminate?
+    }
+    
+Check if filed opened successfully - test teh stream object
+    
+    if(in_file)  //just check the object
+    {
+        //read from it
+    }
+    else
+    {
+        //file could not be opened
+        //does it exist?
+        //should the program terminate?
+    }
+
+Closing a file
+-Always close any open files to clush out any unwritten data
+
+    in_file.close();
+    
+Reading from files using (>>)
+-We can use the extraction operator for formatted read
+-Same way we used it with cin
+
+    int num {};
+    double total {};
+    std::string name {};
+    
+    in_file >> num;
+    in_file >> total  >> name;
+    
+Reading from files using getline
+-We can use getline to read the file one line at a time
+-The getline method will use the stream you are reading from and the stream you are reading into
+
+    std::string line {};
+    std::getline(in_file, line);
+    
+Reading text file one line at at ime - Multiple lines
+    
+    std::ifstream in_file {"../myfile.txt"};  //open file
+    std::string line {};
+    
+    if(!in_file)  //check if file is open
+    {
+        std::cerr << "File open error" << std::endl;
+        return 1;  //exit the program
+    }
+    while(!in_file.eof())  //while not at the end
+    {
+        std::getline(in_file, line);  //read a line
+        std::cout << line << std::endl;  //display the line
+    }
+    
+    in_file.close();  //close the file
+    
+Reading text file one line at a time - Multiple lines - different example
+
+    std::ifstream in_file{"../myfile.txt"};  //open file
+    std::string line {};
+    
+    if(!in_file)  //check if file is open
+    {
+        std::cerr << "File open error" << std::endl;
+        return 1;  //exit the program (main)
+    }
+    whie(std::getline(in_file, line)  //read a line
+    {
+        std::cout << line << std::endl;  //display the line
+    }
+    
+    in_file.close();
+    
+Reading text file one character at a time (get)
+
+    std::ifstream in_file {"../myfile.txt"};  //open file
+    char c;
+    
+    if(!in_file)  //check if file is open
+    {
+        std::cerr << "File open error" << std::endl;
+        return 1;  //exit the program (main)
+    }
+    while(in_file.get(c)) //read a character
+    {
+        std::cout << c;  //display the character
+    }
+    
+    in_file.close();  //close the file

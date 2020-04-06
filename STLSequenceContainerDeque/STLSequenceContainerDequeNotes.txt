@@ -1,0 +1,75 @@
+/*
+The Standard Template Library (STL) - Sequence Containers - Deque
+
+std::deque (double ended queue)
+
+#include <deque>
+
+-Dynamic size
+    -Handled automatically
+    -Can expand and contract as needed
+    -Elements are NOT stored in continguous memory
+-Direct element access (constant time)
+-Rapid insertion and deletion at the front and back (constant time)
+-Insertion or removal of elements (linear time)
+-All iterators available and may invalidate
+
+std::deque - Initialization and Assignment
+
+    std::deque<int> d {1 , 2, 3, 4, 5};
+    std::deque<int> d1 (10, 100);  //ten 100s
+    
+    std::deque<std::string> stooges
+    {
+      std::string ("Larry"),
+      std::string ("Moe"),
+      std::string ("Curly")
+    };
+    
+    d = {2, 4, 6, 8, 10};
+    
+std::deque
+
+    std::deque<int> d {1, 2, 3};
+    d.front();  //first element 1
+    d.back();  //last element 3
+    
+    d.push_back(4);  //back() element is now 4
+    
+    d.push_front(10);  //front() element is now 10
+    
+std::deque - How are elements stored in memory?
+-collection of memory blocks
+-blocks contain elements that are in continuous memory
+-the blocks themselves are not in continuous memory
+-a deque is a linked list of vectors
+    -when we add an element to the front it will add it if it has space,
+     if it doesn't have space it will add a new block, add the element to that block, and then link in the block
+    -same happens if we add an element to the back
+    
+std::deque - Common Methods
+    
+    std::deque<int> d {1, 2, 3, 4, 5};
+    cout << d.size(); //5
+    cout << d.max_size; //a very large number
+    
+    cout << d.at(0); //1
+    cout << d[1];  //2
+    
+    cout << d.front(); //1
+    cout << d.back();  //5
+    
+std::deque - Common Methods
+
+    Person p1 {"Larry", 18};
+    std::deque<Person> d;
+    
+    d.push_back(p1);  //add element to the back
+    d.pop_back();  //remove element from the back
+    
+    d.push_front(Person {"Larry", 18});  //push object to the front
+    d.pop_front();  //remove element from the front
+    
+    d.emplace_back("Larry", 18);  //add to back, most efficient
+    d.emplace_front("Moe", 24);  //add to front, most efficient
+*/
