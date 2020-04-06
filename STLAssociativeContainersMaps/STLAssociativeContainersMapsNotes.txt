@@ -1,0 +1,117 @@
+/*
+The Standard Template Library (STL) - Associative Containers - Maps
+
+The STL Map containers
+
+-Associative containers
+    -Collection of stored objects that allow fast retrieval using a key
+    -STL provides Sets and Maps
+    -Usually implemented as balanced binary tree or hashsets
+    -Most operations are very efficient
+    
+-Maps
+    -std::map
+    -std::unordered_map
+    -std::multimap
+    -std::unordered_multimap
+    
+std::map
+#include <map>
+
+-Similar to a dictionary
+-Elements are stored as Key, Value pairs (std::pair)
+-Ordered by key
+-No duplicate elements (keys are unique)
+-Direct element access using the key
+-All iterators available and invalidate when corresponding element is deleted
+
+std::map - Initialization and Assignment
+Maps are created using key / value pairs, the first element is the key and the second element is the value
+
+    std::map<std::string, int> ml
+    {
+        {"Larry", 18},
+        {"Moe", 25}
+    };
+    
+    std::map<std::string, std::string> m2
+    {
+      {"Bob", "Butcher"},
+      {"Anne", "Baker"},
+      {"Georege", "Candlestick maker"}
+    };
+    
+std::map - Common Methods
+
+    std::map<std::string, std::string> m
+    {
+      {"Bob", "Butcher"},
+      {"Anne", "Backer"},
+      {"George, "Candlestick maker"}
+    };
+    
+    std::cout << m.size();  //3
+    std::cout << m.max_size;  //a very large number
+    
+-No concept of front and back
+
+    //You can created std::pair objects and initalize them to the key / value
+    std::pair<std::string, std::string> p1 {"James", "Mechanic"};
+    
+    //You can insert the pair into the map of the same key/value type
+    m.insert(p1);
+    
+    //You can use the std::make_pair function to insert pairs right into the map
+    m.insert(std::make_pair("Roger", "Ranger"));
+    
+    //You can insert new key/values into a map by using the subscript operator
+    m["Frank"] = "Teacher";  //insert
+    
+    //You can also update existing values using the subscript and .at() method
+    m["Frank"] = "Instructor";  //update value
+    m.at("Frank") = "Professor";  //update value
+    
+-The .at() method will throw an exception if the key doesn't already exist in the map
+ so you cannot use this to insert.
+ 
+    m.erase("Anne");  //erase Anne
+    
+    if(m.find("Bob") != m.end()) //find Bob
+    {
+        std::cout << "Found Bob!" << std::endl;
+    }
+    
+    std::map<std::string, std::string>::iterator it = m.find("George");  //Creates an iterator pointint to George
+    
+    if(it != m.end())
+    {
+        m.erase(it);  //erase George
+    }
+    
+    int num = m.count("Bob"); //0 or 1 (no duplicates)
+    
+    m.clear(); //remove all elements
+    
+    m.empty();  //true or false (is empty?)
+
+std::multi_map
+#include <map>
+
+-Ordered by key
+-Allows duplicate elements
+-All iterators are available
+
+std::unordered_map
+#include <unordered_map>
+
+-Elements are unordered
+-No duplicate elements allowed
+-No reverse iterators are allowed
+
+std::unordered_multimap
+#include <unordered_map>
+
+-Elements are unordered
+-Allows duplicate elements
+-No reverse iterators are allowed
+*/

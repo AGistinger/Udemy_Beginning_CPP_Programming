@@ -1,0 +1,141 @@
+/*The Standard Template Library (STL) - Associative Containers - Sets
+
+The STL Set Containers
+
+-Associative Containers
+    -Collection of stored objects that allow fast retrieval using a key
+    -STL provides Sets and Maps
+    -Usually implemented as a balanced binary tree or hashsets
+    -Most operations are very efficient
+    
+-Sets
+    -std::set
+    -std::unordered_set
+    -std::multiset
+    -std::unordered_multiset
+    
+std::set
+
+#incude <set>
+
+-Similar to a mathematical set
+-Ordered by key
+-No duplicate elements
+-All iterators available and invalidate when corresponding element is deleted
+
+std::set - initialization and assignment
+
+    std::set<int> s {1, 2, 3, 4, 5};
+    
+    std::set<std::string> stooges
+    {
+            std::string ("Larry"),
+            "Moe",
+            std::string ("Curly")
+    };
+    
+    s = {2, 4, 6, 8, 10};
+    
+std::set - Common Methods
+
+-In a Set all duplicate elements are ignored, the set is also sorted
+    std::set<int> s {4, 1, 1, 3, 3, 2, 5};   //1 2 3 4 5
+    
+    std::cout << s.size();  //5
+    
+    std::cout << s.max_size;  //a very large number
+
+-Sets do not allow direct access to elements cannot use [] or .at()
+-No concept of front and back
+-Insert and Emplace can be used to add elements to the set
+-
+
+    s.insert(7);  //1 2 3 4 5 7
+    
+-If 7 was already in the set it would not be added
+-If 7 is not in the set it will be added and added in order
+
+std::set - Common Methods
+
+    Person p1 {"Larry" 18};
+    Person p2 {"Moe", 25};
+    
+    std::set<Person> stooges;
+    
+    stooges.insert(p1);  //adds p1 to the set
+    
+-Set class uses the overloaded < operator to determine if the object exists in the set
+-The insert method returns a std::pair
+
+-std::pair object that is returned has its first attribute as an iterator to the element
+  that we just inserted or an iterator to the duplicate element that is already in the set
+-std::pair has its second attribute as a boolean that indicates whether the operation
+  was successful or not.
+  
+    auto result = stooges.inserter(p2);  //adds p2 to the set
+    
+-Uses operator < for ordering!
+-Returns a std::pair<iterator, bool>
+    -first is an iterator to the inserted element or to the duplicate in the set
+    -second is a boolean indicating success or failure
+    
+    //Example
+    cout << boolalpha;
+    set<int> numbers {1, 2, 3, 4, 5};
+	pair<set<int>::iterator, bool> result = numbers.insert(6);
+    cout << *result.first << " " << result.second << endl;
+    
+std::set - Common Methods
+
+    std::set<int> s {1, 2, 3, 4, 5};
+    
+    s.erase(3);  //erase the 3 : 1 2 4 5
+    
+    std::set<int>::iterator it = s.find(5);
+    if(it != s.end())
+    {
+        s.erase(it);  //erase the 5 : 1 2 4
+    }
+    
+-The sets find method is different than the other containers find method and knows all 
+ about what is inside the set
+
+std::set - Common Methods
+
+    std::set<int> s {1, 2, 3, 4, 5};
+    
+    int num = s.count(1);  //0 or 1
+-count can be used to tell if an element is in the set or not as the element can only exist once 
+ (0 doesn't exist, 1 exists)
+-multisets can have duplicates so this method is more useful there
+    
+    s.clear();  //remove all elements 
+    
+    s.empty();  //returns true(isempty) or false(isnotempty)
+    
+std::multiset
+
+#include <set>
+
+-Sorted by key
+-Allows duplicate elements
+-All iterators are available
+
+std::unordered_set
+
+#include <unordered_set>
+
+-Elements are unordered
+-No duplicate elements allowed
+-Elements cannot be modified
+    -Must be erased and new element inserted
+-No reverse iterators are allowed
+
+std::unordered_multiset
+
+#include <unordered_set>
+
+-Elements are unordered
+-Allows duplicate elements
+-No reverse iterators are allowed
+*/

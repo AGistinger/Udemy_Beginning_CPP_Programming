@@ -1,0 +1,48 @@
+/* 
+The Standard Template Library (STL) - Container Adaptors - Queue
+
+std::queue
+
+-First-in First-out (FIFO) data structure
+-Implemented as an adapter over other STL container
+-Can be implemented as a list or a deque
+-Elements are pushed at the back and popped from the front
+-No iterators are supported
+
+#include <queue>
+
+-push - insert an element at the back of the queue
+-pop - remove an element from the front of the queue
+-front - access the element at the front
+-back - access the element at the back
+-empty - is the queue empty?
+-size - number of elements in the queue
+
+std::queue - Initialization
+
+    std::queue<int> q;  //deque(default)
+    
+    std::queue<int, std::list<int>> q2;  //list
+    
+    std::queue<int, std::deque<int>> q3;  //deque
+    
+std::queue - Common Methods
+
+    std::queue<int> q;
+    
+    q.push(10);  //10
+    
+    q.push(20);  //20 10
+    
+    q.push(30);  //30 20 10
+    
+    std::cout << q.front();  //10 
+    
+    std::cout << q.back();  //30 
+    
+    q.pop();  //remove 10 (30 20)
+    
+    q.pop();  //remove 20 (30)
+    
+    std::cout << q.size();  //1
+*/
