@@ -1,0 +1,26 @@
+//Smart Pointers - Weak Pointer
+
+weak_ptr
+-Provides a non-owning "weak" reference
+
+-weak_ptr<T>
+    -Points to an object of type T on the heap
+    -Does not participate in owning relationship
+    -Always created from a shared_ptr
+    -Does NOT increment or decrement the reference use count
+    -Used to prevent strong reference cycles which could prevent objects from being deleted
+    -Example) is an interator pointer that traverses the list, it visits them temporararly but does not own them
+    
+weak_ptr - circular or cyclic reference
+
+Shared_ptr:
+-A refers to B
+-B refers to A
+-Shared strong ovnership prevents heap deallocation
+    -Shared resources will not be destroyed when the pointer goes out of scope and is destroyed and will leak memory
+
+Weak_ptr:
+-Solution - make one of  the pointers non-owning or 'weak'
+-Now heap storage is deallocated properly
+    -A refers to B
+    -B refers to A 'weak' - non-owning

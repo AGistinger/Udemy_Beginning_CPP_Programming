@@ -1,0 +1,85 @@
+//Smart Pointers - Shared Pointers
+
+-Provides shared ownership of heap objects
+
+-shared_ptr<T>
+    -Points to an object of type T on the heap
+    -It is not unique-there can be many shared_ptrs pointing to the same object on the heap
+    -Establishes shared ownership relationship
+    -CAN be assigned and copied
+    -CAN be moved
+    -Doesn't support managing arrays by default
+    -When the use count is zero, the managed object on the heap is destroyed
+    
+Example) Declaring a Shared Pointer
+
+{
+    std::shared_ptr<int> p1 {new int {100}};
+    std::cout <<  *p1 << std::endl;   //100
+    *p1 = 200;
+    std::cout << *p1 << std::endl;  //200
+    
+} //automatically deleted
+
+Example) Shared Pointer - Some other useful methods
+{
+    //use_count - the number of shared_ptr objects managing the heap object
+    std::shared_ptr<int> p1 {new int {100}};
+    std::cout << p1.use_count() << std::endl;  //1
+    
+    std::shared_ptr<int> p2 {p1};  //shared ownership
+    std::cout << p1.use_count()  << std::endl;  //2
+    
+    p1.reset();  //decrement the use_count;  p1 is nulled out
+    std::cout << p1.use_count() << std::endl;  //0
+    std::cout << p2.use_count() << std::endl;  //1
+    
+}  //automatically deleted
+
+With shared pointers when you call reset() on a pointer it will decrement the count by 1 and null out the pointer that the
+reset() was called on.  The other pointers that still are sharing the same data will not be nulled out and will still
+be pointing to that same data.
+
+Example) shared_ptr - user defined classes
+
+{
+    std::shared_ptr<Account> p1 {new Account {"Larry"};
+    std::cout << *p1 << std::endl;  //display account
+    
+    p1->deposit(1000);
+    p1->withdraw(500);
+    
+}  //automatically deleted
+
+Example) shared_ptr - Vectors and Move
+
+{
+    std::vector<std::shared_ptr<int>> vec;
+    std::shared_ptr<int> ptr {new int {100}};
+    vec.push_back(ptr);  //OK  - copy IS allowed
+    std::cout << ptr.use_count() << std::endl;  //2
+    
+}  //automatically deleted
+
+You cannot push back objects to a vector using a unqiue pointer due to them not allowing copying,
+but you can push back objects to a vector using a shared pointer.
+
+Example) shared_ptr - make_shared C++11)
+
+{
+        std::shared_ptr<int> p1 = make_shared<int> (100);  //use_count : 1
+        std::shared_ptr<int> p2 {p1};  //use_count : 2
+        std::shared_ptr<int> p3;
+        p3 = p1;  //use_count : 3;
+        
+}  //automatically deleted
+
+-Use make_shared - it's more efficient!
+    -Automically creates a data structure that contains:
+        -Reference count
+        -Raw pointer
+        -Heap object
+        -Additional data
+-All 3 pointers point to the SAME object on the heap!
+-When the use_count becomes 0 the heap object is deallocated
+-When you use smart pointeres they are always initialized as nullptr automatically

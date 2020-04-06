@@ -1,0 +1,45 @@
+//Smart Pointers - Custom Deleters
+
+Custom deleters
+-Sometimes when we destroy a smart poitner we need more than to just destroy
+ the object on the heap.
+ -These are special use-cases
+ -C++ smart pointers allow you to provide custom deleters
+ -Lots of ways to achieve this
+    -Functions
+    -Lambdas
+    -Others...
+    
+Custom deleters - Function
+-Write a deleter function that will automatically be called when the smart pointer will be deleters
+-Requires  a raw pointer to the managed object the smart pointer is referencing
+-In the function do what you need to do to relinquish your resources
+-When you declare your smart pointer you provide your deleter function
+
+Example) 
+void my_deleter (Some_Class *raw_pointer)
+{
+    //your custom deleter code
+    delete raw_pointer;
+}
+
+shared_ptr<Some_Class> ptr { new Some_Class {}, my_deleter };
+
+Example)
+void my_deleter(Test *ptr)
+{
+    cout << "In my custom deleter" << endl;
+    deleter ptr;
+}
+
+shared_ptr<My_Class> ptr { new My_Class {}, my_deleter };
+
+Custom deleters - Lambda
+-Annonymous function,  that has no name and can be defined in line
+-Function name parameter has been replaced with a code block
+
+shared_ptr<Test> ptr (new Test {100}, []  (Test *ptr)
+{
+    cout << "\tUsing my custom deleter" << endl;
+    delete ptr;
+});
