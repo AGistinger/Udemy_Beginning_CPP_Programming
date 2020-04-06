@@ -1,0 +1,164 @@
+// I/O and Streams - Writing to a Text File
+
+/*Output files (fstream and ofstream)
+
+fstream and ofstream are commonly used for output files
+
+1. #include <fstream>
+2. Declare an fstream or ofstream object
+3. Connect it to a file on your file system (0pens for writing)
+4. Write data to the file via the stream
+5. Close the stream
+
+Output files (fstream and ofstream)
+
+fstream and ofstream are commonly used for output files
+
+-Output files will be created if they don't exist
+-Output files will be overwritten (truncated) by default
+-Can be opened so that new writes append
+-Can be open in text or binary modes
+
+Opening a file for writing with (fstream)
+
+    std::fstream out_file {"../myfile.txt", std::ios::out};
+    
+-open for writing in binary mode
+    
+    std::fstream outfile {"../myfile.txt", std::ios::out | std::ios::binary};
+    
+Opening a file for writing with (ofstream)
+
+    std::ofstream out_file {"../myfile.txt", std::ios::out};
+    
+-In an (ofstream) object the (std::ios::out) doesn't need to be written because it is already the default
+    std::ofstream out_file {"../myfile.txt"};
+    
+-Open for writing in binary mode
+
+    std::ofstream out_file {"../myfile.txt"}, std::ios::binary};
+    
+Opening a file for writing with (ofstream)
+
+//truncate (discard contents) when opening - Default
+
+    std::ofstream out_file {"../myfile.txt", std::ios::trunc};
+    
+//append on each write
+
+    std::ofstream out_file {"../myfile.txt", std::ios::app};
+    
+//seek to end of stream when opening - sets the stream to the end of the existing file
+
+    std::ofstream out_file {"../myfile.txt", std::ios::ate};
+    
+Opening a file for writing with open
+
+    std::ofstream out_file;
+    std::string filename;
+    std::cin >> filename;  //Get the file name
+    
+    out_file.open(filename);
+    //or
+    out_file.open(filename, std::ios::binary);
+    
+Check if file opened successfully (is_open)
+
+    if(out_file.is_open())
+    {
+        //read from it
+    }
+    else
+    {
+        //file could not be created or opened
+        //does it exist?
+        //should the program terminate?
+    }
+    
+Check if the file opened successfully - test the stream object
+
+    if(out_file) //just check the object
+    {
+        //read from it
+    }
+    else
+    {
+        //file could not be opened
+        //does it exist?
+        //should the program terminate?
+    }
+    
+Closing a file
+-Always close any open files to flush out any unwritten data
+
+    out_file.close();
+
+Writing to files using (<<)
+-We can use the insertion operator for formatted write
+-Same way we used it with cout
+
+    int num {100};
+    double total {255.67};
+    std::string name {"Larry"};
+    
+    out_file << num << "\n" << total << "\n" << name << std::endl;
+    
+-endl flushes out any unwritten buffers
+
+Copying a text file one line at a time
+
+    std::ifstream in_file {"../myfile.txt"}; //open file
+    std::ofstream out_file {"../copy.txt"};
+    
+    if(!in_file) //check if file is open
+    {
+        std::cerr << "File open error" << std::endl;
+        return 1; //exit the program (main)
+    }
+    
+    if(!out_file) //check if file is open
+    {
+        std::cerr << "File create error" << std::endl;
+        return 1; //exit the program (main)
+    }
+    
+Copying a text file one line at a time
+
+    std::string line {};
+    
+    while(std::getline(in_file, line) //read a line
+    {
+        out_file << line << std::endl;  //write a line
+    }
+    
+    in_file.close();  //close the files
+    out_file.close();
+
+Copying a text file one character at a time (get/put)
+
+    std::ifstream in_file {"../myfile.txt"}; //open file
+    std::ofstream out_file {"../copy.txt"};
+    
+    if(!in_file)  //check if file is open
+    {
+        std::cerr << "File open error" << std::endl;
+        return 1;  //exit the program (main)
+    }
+    
+    if(!out_file) //check if file is open
+    {
+        std::cerr << "File create error" << std::endl;
+        return 1; //exit the program (main)
+    }
+
+Copying a text file one character at a time (get/put)
+
+    char c;
+    
+    while(in_file.get(c)) //read a character
+    {
+        out_file.put(c);  //write the character
+    }
+    
+    in_file.close();  //close the files
+    out_file.close();*/

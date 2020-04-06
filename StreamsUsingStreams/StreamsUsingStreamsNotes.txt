@@ -1,0 +1,64 @@
+/*
+I/O and Streams - Using String Streams
+
+Using String Streams
+
+-Allow us to read or write from strings in memory much as we would read and write to
+ files.
+-Very powerful
+-Very useful for data validation
+
+Using String Streams
+
+    stringstream, istringstream, and ostringstream
+    
+1. #include <sstream>
+2. Declare an stringstream, istringstream, or ostringstream object
+3. Connect it to a std::string
+4. Read/write data from/to the string stream using formatted I/O
+
+Reading from a stringstream
+
+    #include <sstream>
+    
+    int num {};
+    double total {};
+    std::string name {};
+    std::string info {"Moe 100 1234.5";
+    
+    std::istringstream iss {info};
+    iss >> name >> num >> total;
+    
+Writing data to a stringstream
+
+    #include <sstream>
+    
+    int num {100};
+    double total {1234.5};
+    std::string name {"Moe"};
+    
+    std::ostringstream oss {};
+    oss << name << " " << num << " " << total;
+    std::cout << oss.str() << std::endl;
+    
+Validating input with stringstream (**** INPUT VALIDATION ****)
+
+    int value {};
+    std::string input {};
+    
+    std::cout << "Enter an integer: ";
+    std::cin >> input;
+    
+    std::stringstream ss {input};
+    if(ss >> value) //connect the ss stringstream object to the int value
+    {
+        std::cout << "An integer was entered";
+    }
+    else
+    {
+        std::cout << "An integer was NOT entered";
+    }
+    
+-This takes the user's input as a string then tries to convert the string into an integer if it is possible.
+-Input must be as a string because it is a stringstream object, <sstream>
+*/

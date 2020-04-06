@@ -1,0 +1,7 @@
+Hello I am testing an Output file
+I can write stuff to files yay
+I am writing to a file :)
+Help me!!!
+Help me...
+I am adding text to a file :S
+I am writing stuff!!!
