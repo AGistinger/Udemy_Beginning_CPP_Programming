@@ -1,0 +1,58 @@
+//Exception  Handling - Creating User-Defined Exception Classes
+
+User-defined exceptions
+
+We can create exception classes and throw instances of those classes
+
+Best Practice:
+    -throw an object not a primitive type
+    -throw an object by value
+    -catch an object by reference (or const reference)
+
+Example) Creating exception classes
+
+class DivideByZeroException
+{
+    
+};
+
+class NegativeValueException
+{
+    
+};
+
+Example) Throwing user-defined exception classes
+
+double calculate_mpg(int miles, int gallons)
+{
+    if(gallons == 0)
+    {
+        throw DivideByZerException();
+    }
+    if(miles < 0 || gallons < 0)
+    {
+        throw NegativeValueException();
+    }
+    
+    return static_cast<double>(miles) / gallons;
+}
+
+Example) Catching user-defined exceptions
+
+try
+{
+    miles_per_gallon = calculate_mpg(miles, gallons);
+    std::cout << miles_per_gallon << std::endl;
+}
+
+catch(const DivideByZeroException &err)
+{
+    std::cerr << "You can't divide by zero" << std::endl;
+}
+
+catch(const NegativeValueException &err)
+{
+    std::cerr << "Negative values aren't allowed" << std::endl;
+}
+
+std::cout << "Bye" << std::endl;

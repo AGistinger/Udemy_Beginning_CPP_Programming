@@ -1,0 +1,54 @@
+//Exception Handling - The C++ std::exception Class Hierarchy
+
+The C++ standard library exception class hierarchy
+
+C++ provides a classs hierarchy of exception classes
+    -std::exception is the base class
+    -all subclasses implement the what() virtual function
+    -we can create our own user-defined exception subclasses
+    
+Example) std::exception virtual function
+    
+    virtual const char *what() const noexcept;
+    
+Example) Using a sub-class of the Exception Class (Deriving our class from std::exception)
+
+    class IllegalBalanceException : public std::exception
+    {
+       public:
+            IllegalBalanceException() noexcept = default;
+            ~IllegalBalanceException() = default;
+            virtual const char* what() const noexcept
+            {
+                return "Illegal Balance Exception";
+            }
+    };
+    
+    Keyword: noexcept
+        Tells the compliler that the methods will not throw an exception, so you cannot throw exceptions from these
+        methods.  The program will terminate if you try to throw an exception from a noexcept function.
+        
+Example) Modified Account Constructur)
+
+    Account::Account(std::string name, double balance)
+        :name {name}, balance {balance}
+        {
+            if(balance < 0.0)
+            {
+                throw IllegalBalanceException{};
+            }
+        }
+        
+    Example) Creating an Account object
+    
+        try
+        {
+            std::unique_ptr<Account> moes_account = std::make_unique<Checking_Account>("Moe", -100.0);
+            std::cout << "Use moes_account" << std::endl;
+        }
+        
+        catch(const IllegalBalanceException &err)
+        {
+            //displays "Illegal balance exception"
+            std::cerr << err.what() << std::endl;
+        }

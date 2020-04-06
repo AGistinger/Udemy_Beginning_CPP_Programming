@@ -1,0 +1,44 @@
+//Exception Handling - Throwing an Exception from a Function
+
+Throwing an exception from a function
+What do we return if the total is zero?
+
+Example)  Function
+
+double calculate_avg(int sum, int total)
+{
+    return static_cast<double>(sum) / total;
+}
+
+-static_cast is being used to convert one of the integer operands as a double
+
+The above function can be re-written to include exception handling
+Example) Function Exception (throw 0)
+
+double calculate_avg(int sum, int total)
+{
+    if(total == 0)
+        throw 0;
+    return static_cast<double>(sum) / total;
+}
+
+If an exception is thrown the compiler will unwind the stack looking for the function
+that handles that exception.
+
+Ex) Catching an exception thrown from a function
+
+double average {};
+
+try
+{
+    average = calculate_average(sum, total);
+    std::cout << average << std::endl;
+}
+
+catch (int &err)
+{
+    std::cerr << "You can't divide by: " << err << std::endl;
+}
+
+-You want to throw by value and catch by reference
+-It's possible to have mulitple catch handlers as well as catch all handlers

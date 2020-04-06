@@ -1,0 +1,38 @@
+//Exception Handling - Class Level Exceptions
+
+Class-level Exceptions
+
+Exceptions can also be thrown from within a class:
+
+-Method
+    -These work the same way as they do for functions as we've seen
+    
+-Constructor
+    -Constructors may fail
+    -Constructors do not return anyv alue
+    -Throw an exception int eh constructor if you cannot initialize an object
+    
+-Destructor
+    -Do NOT throw exceptions from your destructor
+    
+Example) Class-level exceptions
+
+Account::Account(std::string name, double balance)
+    : name {name}, balance {balance}
+    {
+        if(balance < 0.0)
+        {
+            throw IllegalBalanceException{};
+    }
+    
+try
+{
+    //Creating a unqiue pointer to an account object, using make_unique to create a checking account
+    std::unique_ptr<Account> moes_account = std::make_unique<Checking_Account> ("Moe", -10.0);
+    //use moes_account
+}
+
+catch(const IlegalBalanceException &err)
+{
+    std::cerr << "Couldn't create account" << std::endl;
+}

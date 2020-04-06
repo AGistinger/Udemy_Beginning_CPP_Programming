@@ -1,0 +1,80 @@
+//Exception Handling - Handling Multiple Exceptions
+
+Throwing multiple exceptions from a function
+
+What if a function can fail in several ways?
+    -gallons is zero
+    -miles or gallons is negative
+
+double calculate_mpg(int miles, int gallons)
+{
+    return static_cast<double>(miles) / gallons;
+}
+
+-This function will fail if the amount of gallons is 0 because you would have a divide by 0 error
+-This would also produce incorrect results if miles or gallons was negative
+-We can throw a different exception for each case
+
+Example) Throw different type of exceptions for each condition
+
+double calculate mpg(int miles, int gallons)
+{
+    if(gallons == 0)
+    {
+        throw 0;
+    }
+    if(miles < 0 || gallons < 0)
+    {
+        throw std::string{"Negative value error"};
+    }
+    return static_cast<double>(miles) / gallons;
+}
+
+-Check if gallons is zero and throw an exception
+-Check if gallons or miles is < zero and throw an exception
+
+Example) Different type of exceptions in a Function
+
+double miles_per_gallon {};
+
+try
+{
+    miles_per_gallon = calculate_mpg(miles, gallons);
+    std::cout << miles_per_gallon << std::endl;
+}
+
+catch(int &err)
+{
+    std::cerr << "You can't divide by: " << err << std::endl;
+}
+
+catch(std::string &err)
+{
+    std::cerr << err << std::endl;
+}
+
+-If there is no exception the code is excuted
+-If there is a divide by 0 exception the (int) catch handler run
+-if there is a < zero exception the (string) catch handler  will run
+-If there is no catch handler for an exception the program will terminate
+
+Example) Catching any type of exception
+
+catch(int &err)
+{
+    
+}
+
+catch (std::string &err)
+{
+    
+}
+
+catch(...)
+{
+    std::cerr << "Unknown exception" << std::endl;
+}
+
+-This catch handler will fire no matter what kind of exception is thrown
+-It is common to put it at the end of all the other catch blocks
+-Don't have access to the excepton object thrown but you can deal with the exception in the body of the block
