@@ -1,0 +1,8 @@
+1. Programming: Principles and Practice Using C++ by Bjarne Stroustrup.
+Good book written by the creator of C++. It should be read slowly and deliberately since it can get complex in places.
+
+2. Jumping into C++ by Alex Allain. Nice intro book.
+
+3. C++ How to Program by Deitel and Deitel. Big book with lots of detail - take it slow since the detail can be too much at times.
+
+4. Starting Out with C++ from Control Structures to Objects by Tony Gaddis - nice, pretty easy read for beginners.
